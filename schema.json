@@ -30,7 +30,7 @@
         },
         {
           "background": "#ff7474",
-          "foreground": "#ffffff",
+          "foreground": "#f8f8f2",
           "leading_diamond": "\ue0b2",
           "style": "diamond",
           "template": "\ue266 RAM: {{ round .PhysicalPercentUsed .Precision }}% | {{ (div ((sub .PhysicalTotalMemory .PhysicalAvailableMemory)|float64) 1073741824.0) }}/{{ (div .PhysicalTotalMemory 1073741824.0) }}GB \ue266 ",
