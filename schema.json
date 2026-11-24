@@ -33,7 +33,7 @@
           "foreground": "#f8f8f2",
           "leading_diamond": "\ue0b2",
           "style": "diamond",
-          "template": "\ue266 RAM: {{ round .PhysicalPercentUsed .Precision }}% | {{ (div ((sub .PhysicalTotalMemory .PhysicalAvailableMemory)|float64) 1073741824.0) }}/{{ (div .PhysicalTotalMemory 1073741824.0) }}GB \ue266 ",
+          "template": "\ue266 RAM: {{ round .PhysicalPercentUsed .Precision }}% | {{ printf \"%.1f\" (divf (sub .PhysicalTotalMemory .PhysicalAvailableMemory) 1073741824.0) }}/{{ round (divf .PhysicalTotalMemory 1073741824.0) 0 }}GB \ue266 ",
           "trailing_diamond": "<transparent,#ff7474>\ue0b2</>",
           "type": "sysinfo"
         },
@@ -43,7 +43,7 @@
           "leading_diamond": "\ue0b2",
           "properties": {
             "style": "roundrock",
-            "threshold": 0
+            "threshold": 500
           },
           "style": "diamond",
           "template": " {{ .FormattedMs }} ",
@@ -71,6 +71,15 @@
           "template": " {{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }} ",
           "trailing_diamond": "\ue0b0",
           "type": "git"
+        },
+        {
+          "background": "#fce5e5",
+          "foreground": "#541616",
+          "leading_diamond": "\ue0b2",
+          "style": "diamond",
+          "template": " \ue718 {{ .Full }} ",
+          "trailing_diamond": "\ue0b0",
+          "type": "node"
         }
       ],
       "type": "prompt"
@@ -120,7 +129,10 @@
           },
           "style": "plain",
           "template": "\u2570\u2500 ",
-          "type": "status"
+          "type": "status",
+          "foreground_templates": [
+            "{{ if gt .Code 0 }}#ff7474{{ end }}"
+          ]
         }
       ],
       "type": "prompt"
