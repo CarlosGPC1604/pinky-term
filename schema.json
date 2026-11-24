@@ -91,7 +91,10 @@
         {
           "style": "plain",
           "template": "\u256d\u2500",
-          "type": "text"
+          "type": "text",
+          "foreground_templates": [
+            "{{ if gt .Code 0 }}#ff7474{{ end }}"
+          ]
         },
         {
           "properties": {
